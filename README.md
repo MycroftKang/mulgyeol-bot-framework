@@ -3,7 +3,7 @@
 Mulgyeol Bot Framework을 통해 명령 처리 봇을 빠르게 디자인 할 수 있습니다.
 
 ## Example
-* [Mulgyeol Labs Fabric Bot](https://gitlab.com/mgylabs/developer/taehyeokkang/MGLabsBot)
+* [Mulgyeol Labs Fabric Bot](https://gitlab.com/MGYLBot)
 > Mulgyeol Labs Fabric Bot은 Mulgyeol Bot Framework를 이용하여 개발되었습니다.
 
 ## How to use
