@@ -1,5 +1,4 @@
-from MGBotBuilder.Console import CommandConsole
-from MGBotBuilder.utils import Request
+from MGBotBuilder import CommandConsole, Request
 
 console = CommandConsole()
 

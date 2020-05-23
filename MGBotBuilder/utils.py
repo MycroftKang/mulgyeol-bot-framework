@@ -18,10 +18,6 @@ class CommandRule:
         self.permission = permission
         self.func = func
 
-class RequestObject:
-    def __init__(self, req, user):
-        self.req = shlex.split(req)
-
 def parse_rule(rule):
     params = re.findall('<(\w+)>', rule)
     cmdreg = re.compile(re.sub('<\w+>', '(.*)', rule))

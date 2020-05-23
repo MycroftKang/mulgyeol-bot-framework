@@ -9,7 +9,7 @@ Mulgyeol Bot Framework을 통해 명령 처리 봇을 빠르게 디자인 할 �
 ## How to use
 
 ```python
-from MGBotBuilder.Console import CommandConsole
+from MGBotBuilder import CommandConsole
 
 console = CommandConsole()
 
@@ -36,7 +36,7 @@ def merge(ctx, num1):
 
 ```python
 from example_CmdRegistry import console
-from MGBotBuilder.utils import Request
+from MGBotBuilder import Request
 
 command = '#set vol 3'
 user = 'Tester'
@@ -46,6 +46,7 @@ res = console.bind(req)
 
 ```python
 from example_CmdRegistry import console
+from MGBotBuilder import Request
 
 command = '@MGYLBot merge this in <num1> minute[s]?'
 user = 'Tester'
