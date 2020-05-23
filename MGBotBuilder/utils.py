@@ -2,9 +2,18 @@ import re
 import shlex
 import MGBotBuilder.exceptions as exceptions
 
+class Request:
+    def __init__(self, user, commad, **kwargs):
+        self.user = user
+        self.command = commad
+        self.__dict__.update(kwargs)
+
+    def add(self, **kwargs):
+        self.__dict__.update(kwargs)
+
 class CommandRule:
-    def __init__(self, cmd, params, permission, func):
-        self.command = cmd.upper()
+    def __init__(self, cmdreg, params, permission, func):
+        self.command = cmdreg
         self.params = params
         self.permission = permission
         self.func = func
@@ -14,18 +23,9 @@ class RequestObject:
         self.req = shlex.split(req)
 
 def parse_rule(rule):
-    cmd = re.match('(.+) <', rule)
-    if cmd == None:
-        cmd = rule
-        params = []
-    else:
-        params = re.findall('<([a-zA-Z]\w*)>', rule)
-    return cmd, params
+    params = re.findall('<(\w+)>', rule)
+    cmdreg = re.compile(re.sub('<\w+>', '(.*)', rule))
+    return cmdreg, params
 
-def parse_req(req_list, CR):
-    req_list = req_list[1:]
-    if len(req_list) != len(CR.params):
-        raise exceptions.CommandParseError
-    else:
-        data = {CR.params[i]:req_list[i] for i in range(len(req_list))}
-    return data
+def parse_req(params, cr:CommandRule):
+    return dict(zip(cr.params, params))
