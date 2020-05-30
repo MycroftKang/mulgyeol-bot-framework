@@ -1,4 +1,3 @@
-import requests
 import threading
 import MGBotBuilder.exceptions as exceptions
 import MGBotBuilder.utils as utils

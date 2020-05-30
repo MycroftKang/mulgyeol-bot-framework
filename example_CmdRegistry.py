@@ -12,7 +12,8 @@ def show_help(ctx):
 
 @console.command('#set vol <num1>')
 def setting(ctx, num1):
-    pass
+    print(num1)
+    return "Complete"
 
 @console.command('@MGYLBot merge this in <num1> minute[s]?')
 def merge(ctx, num1):

@@ -48,7 +48,7 @@ res = console.bind(req)
 from example_CmdRegistry import console
 from MGBotBuilder import Request
 
-command = '@MGYLBot merge this in <num1> minute[s]?'
+command = '@MGYLBot merge this in 3 minutes'
 user = 'Tester'
 reqtime = 1586676476
 req = Request(user, command, timestamp=reqtime)

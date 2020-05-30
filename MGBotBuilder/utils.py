@@ -1,5 +1,4 @@
 import re
-import shlex
 import MGBotBuilder.exceptions as exceptions
 
 class Request:
@@ -20,7 +19,7 @@ class CommandRule:
 
 def parse_rule(rule):
     params = re.findall('<(\w+)>', rule)
-    cmdreg = re.compile(re.sub('<\w+>', '(.*)', rule))
+    cmdreg = re.compile('^'+re.sub('<\w+>', '(.+)', rule)+'$')
     return cmdreg, params
 
 def parse_req(params, cr:CommandRule):
