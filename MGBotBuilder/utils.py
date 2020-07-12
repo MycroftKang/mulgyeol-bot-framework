@@ -1,6 +1,7 @@
 import re
 import MGBotBuilder.exceptions as exceptions
 
+
 class Request:
     def __init__(self, user, commad, **kwargs):
         self.user = user
@@ -10,17 +11,17 @@ class Request:
     def add(self, **kwargs):
         self.__dict__.update(kwargs)
 
+
 class CommandRule:
-    def __init__(self, cmdreg, params, permission, func):
+    def __init__(self, cmdreg, permission, func):
         self.command = cmdreg
-        self.params = params
         self.permission = permission
         self.func = func
 
-def parse_rule(rule):
-    params = re.findall('<(\w+)>', rule)
-    cmdreg = re.compile('^'+re.sub('<\w+>', '(.+)', rule)+'$')
-    return cmdreg, params
 
-def parse_req(params, cr:CommandRule):
-    return dict(zip(cr.params, params))
+def parse_rule(rule):
+    params = re.findall('(<\w+>)', rule)
+    for p in params:
+        rule = re.sub(p, f'(?P{p}.+)', rule)
+    rule = re.compile('^'+rule+'$', re.IGNORECASE)
+    return rule
