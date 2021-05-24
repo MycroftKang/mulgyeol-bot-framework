@@ -20,8 +20,8 @@ class CommandRule:
 
 
 def parse_rule(rule):
-    params = re.findall('(<\w+>)', rule)
+    params = re.findall("(<\w+>)", rule)
     for p in params:
-        rule = re.sub(p, f'(?P{p}.+)', rule)
-    rule = re.compile('^'+rule+'$', re.IGNORECASE)
+        rule = re.sub(p, f"(?P{p}.+?)", rule)
+    rule = re.compile("^" + rule + "$", re.IGNORECASE)
     return rule

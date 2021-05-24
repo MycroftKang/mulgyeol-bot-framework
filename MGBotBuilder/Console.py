@@ -1,23 +1,31 @@
 import threading
 import MGBotBuilder.exceptions as exceptions
 import MGBotBuilder.utils as utils
-import re
 
 
-class CommandConsole:
+class VirtualCommandConsole:
     def __init__(self):
         self.registry = []
-        self.reply_func = None
-        self.exception_func = None
 
     def command(self, *cmdrule, permission=[]):
         def deco(f):
             for i in cmdrule:
                 cmd = utils.parse_rule(i)
-                self.registry.append(utils.CommandRule(
-                    cmd, permission, f))
+                self.registry.append(utils.CommandRule(cmd, permission, f))
             return f
+
         return deco
+
+
+class CommandConsole(VirtualCommandConsole):
+    def __init__(self):
+        super().__init__()
+
+        self.reply_func = None
+        self.exception_func = None
+
+    def extend(self, vcc: VirtualCommandConsole):
+        self.registry.extend(vcc.registry)
 
     def exception(self, func):
         self.exception_func = func
@@ -28,7 +36,7 @@ class CommandConsole:
         return func
 
     def forward(self, request: utils.Request):
-        t = threading.Thread(target=self.bind, args=(request, ))
+        t = threading.Thread(target=self.bind, args=(request,))
         t.start()
         return t
 
